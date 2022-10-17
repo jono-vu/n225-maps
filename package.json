@@ -7,7 +7,6 @@
     "start": "ts-node src/app"
   },
   "devDependencies": {
-    "@types/": "googlemaps/google-maps-services-js",
     "@types/node": "^18.11.0",
     "@types/node-fetch": "^2.6.2",
     "ts-node": "^10.9.1",
