@@ -1,12 +1,7 @@
-import http from "http";
+import { Response } from "express";
 
 import { env } from "../config";
-import {
-  placeIdFromText,
-  getSteps,
-  writeHeaders,
-  renderStaticHtml,
-} from "../features";
+import { getSteps, placeIdFromText, renderStaticHtml } from "../features";
 
 interface Params {
   ["origin_query"]?: string;
@@ -15,7 +10,7 @@ interface Params {
 }
 
 interface DirectionsProps {
-  res: http.ServerResponse;
+  res: Response;
   url: string;
 }
 
@@ -49,8 +44,6 @@ const Directions = async ({ res, url }: DirectionsProps) => {
   }
 
   const { steps, duration } = stepsData;
-
-  writeHeaders(res);
 
   return renderStaticHtml(
     res,

@@ -1,3 +1,5 @@
+import fetch from "node-fetch";
+
 import { env } from "../../config";
 
 async function placeIdFromText(query: string) {

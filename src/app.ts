@@ -1,17 +1,12 @@
-import http from "http";
+import express from "express";
 
 import { env } from "./config";
 import { Directions, Landing, NoMatch } from "./routes";
 
-const requestListener = async function (
-  req: http.IncomingMessage,
-  res: http.ServerResponse
-) {
-  const { url } = req;
+const app = express();
 
-  if (!url) {
-    return;
-  }
+app.get(["/", "/directions"], (req, res) => {
+  const { url } = req;
 
   if (url.startsWith("/directions")) {
     return Directions({ res, url });
@@ -22,9 +17,6 @@ const requestListener = async function (
   }
 
   return Landing({ res });
-};
-
-const server = http.createServer(requestListener);
-server.listen(env.PORT, Number(env.HOST), () => {
-  console.log(`Server is running on http://${env.HOST}:${env.PORT}`);
 });
+
+app.listen(env.PORT, () => console.log(`App listening on port ${env.PORT}.`));

@@ -1,11 +1,11 @@
-import http from "http";
+import { Response } from "express";
 
-function renderStaticHtml(res: http.ServerResponse, children: string) {
-  res.write(`<html><body>`);
-  res.write(children);
-  res.write(`</body></html>`);
-
-  res.end();
+function renderStaticHtml(res: Response, children: string) {
+  res.send(/* html */ `
+    <html>
+      <body>${children}</body>
+    </html>
+  `);
 }
 
 export { renderStaticHtml };

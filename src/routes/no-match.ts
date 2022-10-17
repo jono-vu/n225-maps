@@ -1,13 +1,12 @@
-import http from "http";
+import { Response } from "express";
 
-import { writeHeaders, renderStaticHtml } from "../features";
+import { renderStaticHtml } from "../features";
 
 interface NoMatchProps {
-  res: http.ServerResponse;
+  res: Response;
 }
 
 const NoMatch = async ({ res }: NoMatchProps) => {
-  writeHeaders(res);
   return renderStaticHtml(res, staticHtml);
 };
 

@@ -1,13 +1,12 @@
-import http from "http";
+import { Response } from "express";
 
-import { writeHeaders, renderStaticHtml } from "../features";
+import { renderStaticHtml } from "../features";
 
 interface LandingProps {
-  res: http.ServerResponse;
+  res: Response;
 }
 
 const Landing = async ({ res }: LandingProps) => {
-  writeHeaders(res);
   return renderStaticHtml(res, staticHtml);
 };
 
