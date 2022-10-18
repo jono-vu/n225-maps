@@ -18,10 +18,9 @@ function renderStep({ step }: RenderStepProps) {
   return /* html */ `
   
   ----------------
-  <br>
-  <a href=""><h3>${step.distance.text} ${getManeuverSymbol(
-    maneuver || ""
-  )}</h3></a>
+  <a href="https://n225-maps.herokuapp.com"><h3>${
+    step.distance.text
+  } ${getManeuverSymbol(maneuver || "")}</h3></a>
   <p>${step.html_instructions}</p>
 
   `;
