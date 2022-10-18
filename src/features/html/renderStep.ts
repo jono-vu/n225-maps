@@ -19,9 +19,9 @@ function renderStep({ step }: RenderStepProps) {
   
   ----------------
   <br>
-  <h3>
-    <a href="">${step.distance.text} ${getManeuverSymbol(maneuver || "")}</a>
-  </h3>
+  <a href=""><h3>${step.distance.text} ${getManeuverSymbol(
+    maneuver || ""
+  )}</h3></a>
   <p>${step.html_instructions}</p>
 
   `;
