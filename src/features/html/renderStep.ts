@@ -1,4 +1,4 @@
-import { getManeuverSymbol } from "../maps";
+import { getManeuverSymbol, getStreetLabel } from "../maps";
 
 interface Step {
   html_instructions: string;
@@ -14,13 +14,16 @@ interface RenderStepProps {
 
 function renderStep({ step, i }: RenderStepProps) {
   const maneuver = step.maneuver;
+  const streetLabel = getStreetLabel(step.html_instructions);
   return /* html */ `
   
-  <h3 tabindex="${i}">${step.distance.text} ${getManeuverSymbol(
-    maneuver || ""
-  )}</h3>
-  ${step.html_instructions}
-  <br>  
+  ----------------
+  <br>
+  <h3 tabindex="${i}">
+    ${step.distance.text} ${getManeuverSymbol(maneuver || "")}
+  </h3>
+  <p>${step.html_instructions}</p>
+
   `;
 }
 

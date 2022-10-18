@@ -7,6 +7,7 @@ interface Params {
   ["origin_query"]?: string;
   ["destination_query"]?: string;
   ["transport_type"]?: string;
+  ["avoid_tolls"]?: boolean;
 }
 
 interface DirectionsProps {
@@ -35,6 +36,7 @@ const Directions = async ({ res, url }: DirectionsProps) => {
     origin: `place_id:${originPlaceId}`,
     destination: `place_id:${destinationPlaceId}`,
     mode: params.transport_type || "driving",
+    avoid: params.avoid_tolls ? "tolls" : "",
   });
 
   const stepsData = await getSteps(qs);
@@ -49,9 +51,10 @@ const Directions = async ({ res, url }: DirectionsProps) => {
     res,
     /* html */ `
   
-  <u>${params.origin_query} → ${params.destination_query}</u>
-  <p>${duration?.text}</p>
-  ${steps?.join("<hr>")}
+    <a>${params.origin_query}</a> → <a>${params.destination_query}</a>
+    <p>${duration?.text}</p>
+
+    ${steps?.join("")}
 
   `
   );
