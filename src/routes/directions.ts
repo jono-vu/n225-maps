@@ -50,8 +50,8 @@ const Directions = async ({ res, url }: DirectionsProps) => {
     /* html */ `
   
   <u>${params.origin_query} → ${params.destination_query}</u>
-  <p>${duration.text}</p>
-  ${steps.join("<hr>")}
+  <p>${duration?.text}</p>
+  ${steps?.join("<hr>")}
 
   `
   );
