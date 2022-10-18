@@ -14,7 +14,7 @@ export { NoMatch };
 
 export { staticHtml };
 
-const staticHtml = /*html*/ `
+const staticHtml = /* html */ `
 <section>
   <a href="/">Go back to home</a>
 </section>

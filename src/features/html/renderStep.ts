@@ -7,11 +7,18 @@ interface Step {
   maneuver?: string;
 }
 
-function renderStep(step: Step) {
+interface RenderStepProps {
+  step: Step;
+  i: number;
+}
+
+function renderStep({ step, i }: RenderStepProps) {
   const maneuver = step.maneuver;
   return /* html */ `
   
-  <h3>${step.distance.text} ${getManeuverSymbol(maneuver || "")}</h3>
+  <h3 tabindex="${i}">${step.distance.text} ${getManeuverSymbol(
+    maneuver || ""
+  )}</h3>
   ${step.html_instructions}
   <br>  
   `;

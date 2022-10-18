@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
 import { env } from "../../config";
-import { Step, renderStep } from "../maps";
+import { renderStep, Step } from "../html";
 
 async function getSteps(qs: URLSearchParams) {
   let steps;
@@ -22,8 +22,8 @@ async function getSteps(qs: URLSearchParams) {
       return;
     }
 
-    steps = json.routes[0]?.legs[0]?.steps.map((step: Step) =>
-      renderStep(step)
+    steps = json.routes[0]?.legs[0]?.steps.map((step: Step, i: number) =>
+      renderStep({ step, i })
     );
 
     duration = json.routes[0]?.legs[0]?.duration;
