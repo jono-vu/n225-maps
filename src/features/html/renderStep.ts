@@ -2,8 +2,8 @@ import { getManeuverSymbol, getStreetLabel } from "../maps";
 
 interface Step {
   html_instructions: string;
-  distance: { text: string };
-  duration: { text: string };
+  distance?: { text: string };
+  duration?: { text: string };
   maneuver?: string;
 }
 
@@ -14,12 +14,16 @@ interface RenderStepProps {
 
 function renderStep({ step }: RenderStepProps) {
   const maneuver = step.maneuver;
-  const streetLabel = getStreetLabel(step.html_instructions);
+
   return /* html */ `
     <a href="https://n225-maps.herokuapp.com">
-      <h3>${step.distance.text} ${getManeuverSymbol(maneuver || "")}</h3>
+      <h3>
+        ${getManeuverSymbol(maneuver || "")}
+        ${step.distance?.text}
+        ${getStreetLabel(step.html_instructions)}
+      </h3>
     </a>
-  <p>${step.html_instructions}</p>
+  <p>${step.duration?.text} ${step.html_instructions}</p>
   `;
 }
 
