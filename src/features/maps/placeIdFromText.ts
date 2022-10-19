@@ -6,6 +6,7 @@ import { renderStep, Step } from "../html";
 async function getSteps(qs: URLSearchParams) {
   let steps;
   let duration;
+  let error;
 
   try {
     const directions = await fetch(
@@ -19,7 +20,8 @@ async function getSteps(qs: URLSearchParams) {
     const json = await directions.json();
 
     if (!json) {
-      return;
+      error = "Couldn't get convert directions.";
+      return { error };
     }
 
     steps = json.routes[0]?.legs[0]?.steps.map((step: Step, i: number) =>
@@ -27,11 +29,13 @@ async function getSteps(qs: URLSearchParams) {
     );
 
     duration = json.routes[0]?.legs[0]?.duration;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    error = JSON.stringify(err);
+
+    return { error };
   }
 
-  return { steps, duration };
+  return { steps, duration, error };
 }
 
 export { getSteps };

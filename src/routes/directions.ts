@@ -2,6 +2,7 @@ import { Response } from "express";
 
 import { env } from "../config";
 import { getSteps, placeIdFromText, renderStaticHtml } from "../features";
+import { Error } from "./error";
 
 interface Params {
   ["origin_query"]?: string;
@@ -27,8 +28,12 @@ const Directions = async ({ res, url }: DirectionsProps) => {
     params.destination_query || ""
   );
 
-  if (!originPlaceId || !destinationPlaceId) {
-    return;
+  if (!originPlaceId) {
+    return Error({ res, message: "Your origin could not be placed." });
+  }
+
+  if (!destinationPlaceId) {
+    return Error({ res, message: "Your destination could not be placed." });
   }
 
   const qs = new URLSearchParams({
@@ -41,8 +46,12 @@ const Directions = async ({ res, url }: DirectionsProps) => {
 
   const stepsData = await getSteps(qs);
 
-  if (!stepsData) {
-    return;
+  if (stepsData.error) {
+    return Error({ res, message: "Your destination could not be placed." });
+  }
+
+  if (!stepsData.steps) {
+    return Error({ res, message: "Could not query steps to destination." });
   }
 
   const { steps, duration } = stepsData;
